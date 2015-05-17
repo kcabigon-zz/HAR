@@ -1,0 +1,39 @@
+---
+title: "PA1_template.Rmd"
+output: pdf_document
+---
+
+This is an R Markdown document of the 1st Peer Assessment in the Reproducible Research course in the Data Science Specialization.
+
+The data used in this assignment comes from activity of an individual monitored using devices such as a FitBit, FuelBand, or Jawbone Up.
+
+
+We first read the CSV and input the data into a data frame called "activity"
+```{r, echo = TRUE}
+activity <- read.csv("activity.csv")
+```
+
+We can calculate the mean total of number of steps taken per day by doing this:
+```{r, echo = TRUE}
+data <- activity[complete.cases(activity),]
+stepsbydate <- tapply(data$steps, data$date, sum)
+hist(stepsbydate)
+```
+
+The mean and the median of the steps are as follows:
+```{r, echo = TRUE}
+mean(stepsbydate, na.rm = TRUE)
+median(stepsbydate, na.rm = TRUE)
+```
+
+The plot of the steps by interval
+```{r, echo = TRUE}
+plot(x = names(stepsbyinterval), y = stepsbyinterval, type = "l")
+```
+From this plot, we can see that the 835th 5 minute interval has the highest value at 10,927 steps.
+
+
+The number of unobservable rows are:
+```{r, echo = TRUE}
+sum(is.na(activity$steps))
+```
